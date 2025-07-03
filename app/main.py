@@ -4,6 +4,10 @@ from fastapi import FastAPI
 from app.routes import ops, client
 from app.database import Base, engine
 import os
+import uvicorn
+
+if __name__ == "__main__":
+    uvicorn.run("app.main:app", host="0.0.0.0", port=10000, reload=False)
 
 # Ensure uploads folder exists
 if not os.path.exists("uploads"):
