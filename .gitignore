@@ -4,3 +4,4 @@ uploads/
 *.sqlite3
 *.db
 .env
+venv/
