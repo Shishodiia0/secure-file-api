@@ -5,7 +5,9 @@ from fastapi import FastAPI
 import uvicorn
 
 from app.database import Base, engine
-from app.routes import client_user, ops_user  # ✅ Only existing routers
+from app.routes.client import router as client_user
+from app.routes.ops import router as ops_user
+
 
 # Initialize app
 app = FastAPI(title="Secure File Sharing System")
@@ -16,8 +18,9 @@ def root():
     return {"message": "Secure File Sharing API is running!"}
 
 # Include routers
-app.include_router(client_user.router, prefix="/client", tags=["Client User"])
-app.include_router(ops_user.router, prefix="/ops", tags=["Ops User"])
+app.include_router(client_user, prefix="/client", tags=["Client User"])
+app.include_router(ops_user, prefix="/ops", tags=["Ops User"])
+
 
 # Ensure 'uploads' directory exists
 if not os.path.exists("uploads"):
