@@ -111,20 +111,20 @@ def download_file(enc: str, db: Session = Depends(get_db), current_user: models.
     }
 # Only for development/testing — remove later
 
-@router.post("/ops-temp-signup")
-def create_ops_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
-    existing = db.query(models.User).filter(models.User.email == user.email).first()
-    if existing:
-        raise HTTPException(status_code=400, detail="Email already registered")
+# @router.post("/ops-temp-signup")
+# def create_ops_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
+#     existing = db.query(models.User).filter(models.User.email == user.email).first()
+#     if existing:
+#         raise HTTPException(status_code=400, detail="Email already registered")
 
-    hashed = utils.hash_password(user.password)
-    new_user = models.User(
-        email=user.email,
-        hashed_password=hashed,
-        role="ops",        # 🚀 key difference here
-        is_verified=True   # skip email verify for quick testing
-    )
-    db.add(new_user)
-    db.commit()
-    db.refresh(new_user)
-    return {"message": "Ops user created"}
+#     hashed = utils.hash_password(user.password)
+#     new_user = models.User(
+#         email=user.email,
+#         hashed_password=hashed,
+#         role="ops",        # 🚀 key difference here
+#         is_verified=True   # skip email verify for quick testing
+#     )
+#     db.add(new_user)
+#     db.commit()
+#     db.refresh(new_user)
+#     return {"message": "Ops user created"}
