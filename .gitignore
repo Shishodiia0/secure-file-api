@@ -1,6 +1,9 @@
 env/
 __pycache__/
-uploads/
+# Ignore all contents inside uploads, except .gitkeep
+uploads/*
+!uploads/.gitkeep
+
 *.sqlite3
 *.db
 .env
